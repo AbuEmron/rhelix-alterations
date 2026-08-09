@@ -3,10 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import SmartImage from "./SmartImage";
+import { fmt, useI18n } from "@/lib/i18n-client";
 
 export default function Gallery({ images, alt }: { images: string[]; alt: string }) {
   const [active, setActive] = useState(0);
   const [zoomed, setZoomed] = useState(false);
+  const { dict } = useI18n();
 
   if (images.length === 0) {
     return (
@@ -24,7 +26,7 @@ export default function Gallery({ images, alt }: { images: string[]; alt: string
           <div key={src} className="img-frame aspect-[3/4] w-full shrink-0 snap-center">
             <Image
               src={src}
-              alt={`${alt} — beeld ${i + 1}`}
+              alt={`${alt} — ${fmt(dict.product.imageN, { n: i + 1 })}`}
               fill
               sizes="100vw"
               priority={i === 0}
@@ -47,7 +49,7 @@ export default function Gallery({ images, alt }: { images: string[]; alt: string
               <button
                 key={src}
                 onClick={() => setActive(i)}
-                aria-label={`Beeld ${i + 1}`}
+                aria-label={fmt(dict.product.imageN, { n: i + 1 })}
                 className={`img-frame aspect-[3/4] transition-opacity ${
                   i === active ? "ring-1 ring-ink" : "opacity-60 hover:opacity-100"
                 }`}
@@ -60,7 +62,7 @@ export default function Gallery({ images, alt }: { images: string[]; alt: string
         <button
           onClick={() => setZoomed(true)}
           className="img-frame aspect-[3/4] flex-1 cursor-zoom-in"
-          aria-label="Vergroot afbeelding"
+          aria-label={dict.product.zoomOpen}
         >
           <Image
             src={images[active]}
@@ -79,16 +81,16 @@ export default function Gallery({ images, alt }: { images: string[]; alt: string
           className="fixed inset-0 z-[70] flex cursor-zoom-out items-center justify-center bg-ivory/98 p-4 animate-fade-in"
           onClick={() => setZoomed(false)}
           role="dialog"
-          aria-label="Vergrote productfoto"
+          aria-label={dict.product.zoomDialog}
         >
           <div className="relative h-full w-full max-w-5xl">
             <Image src={images[active]} alt={alt} fill sizes="100vw" className="object-contain" />
           </div>
           <button
             className="absolute right-6 top-6 text-[0.7rem] font-bold uppercase tracking-[0.22em]"
-            aria-label="Sluiten"
+            aria-label={dict.product.zoomClose}
           >
-            Sluiten ×
+            {dict.product.zoomClose} ×
           </button>
         </div>
       )}

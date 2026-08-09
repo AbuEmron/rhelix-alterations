@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageShell from "@/components/PageShell";
 import ProductGrid from "@/components/ProductGrid";
 import { getProducts } from "@/lib/catalog";
+import { getI18n } from "@/lib/i18n-server";
 
 export const metadata: Metadata = {
   title: "News",
@@ -10,26 +11,25 @@ export const metadata: Metadata = {
   alternates: { canonical: "/news/" },
 };
 
-export default function NewsPage() {
+export default async function NewsPage() {
+  const { dict } = await getI18n();
   const latest = getProducts().slice(0, 8);
   return (
     <>
       <PageShell
-        eyebrow="Journal"
+        eyebrow={dict.news.eyebrow}
         title={
           <>
-            Nieuw in de <em className="italic text-taupe">boutique</em>
+            {dict.news.titlePre}
+            <em className="italic text-taupe">{dict.news.titleEm}</em>
+            {dict.news.titlePost}
           </>
         }
       >
-        <p>
-          Warme tinten, comfortabele stoffen en stijlvolle modest fashion voor
-          het seizoen — de etalage aan de Kinkerstraat wisselt, hier lees je wat
-          er net is binnengekomen.
-        </p>
+        <p>{dict.news.p1}</p>
         <p>
           <Link href="/shop/" className="link-underline">
-            Bekijk alle nieuwe items in de shop
+            {dict.news.cta}
           </Link>
         </p>
       </PageShell>

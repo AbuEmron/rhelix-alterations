@@ -4,10 +4,11 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Product, Variant } from "@/lib/types";
 import { useWishlist } from "@/lib/wishlist";
+import { useI18n } from "@/lib/i18n-client";
 
 /**
  * Purchase interface. The secure cart/checkout stays on the existing Ferganza
- * platform — "In de winkeltas" either posts to the platform's own captured
+ * platform — the buy action either posts to the platform's own captured
  * cart endpoint or hands the customer to the variant's proven product URL on
  * the store origin (see lib/commerce.ts). No payment logic lives here.
  */
@@ -25,6 +26,7 @@ export default function BuyPanel({
   compareAtLabel: string | null;
 }) {
   const { has, toggle } = useWishlist();
+  const { dict } = useI18n();
   const [size, setSize] = useState<string | null>(null);
   const [sizeError, setSizeError] = useState(false);
   const wished = has(variant.id);
@@ -45,7 +47,8 @@ export default function BuyPanel({
       {product.variants.length > 1 && (
         <div className="mt-8">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-soft">
-            Kleur{variant.color ? ` — ${variant.color}` : ""}
+            {dict.product.colorLabel}
+            {variant.color ? ` — ${variant.color}` : ""}
           </p>
           <div className="mt-3 flex flex-wrap gap-2.5">
             {product.variants.map((v) => (
@@ -71,10 +74,10 @@ export default function BuyPanel({
         <div className="mt-8">
           <div className="flex items-baseline justify-between">
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-soft">
-              Maat
+              {dict.product.sizeLabel}
             </p>
             {sizeError && (
-              <p className="text-xs text-red-800">Kies eerst een maat</p>
+              <p className="text-xs text-red-800">{dict.product.chooseSize}</p>
             )}
           </div>
           <div className="mt-3 flex flex-wrap gap-2.5">
@@ -102,22 +105,19 @@ export default function BuyPanel({
         <div className="flex gap-3">
           {soldOut ? (
             <span className="flex-1 border border-sand bg-bone px-8 py-4 text-center text-[0.7rem] font-bold uppercase tracking-[0.22em] text-taupe">
-              Uitverkocht
+              {dict.common.soldOut}
             </span>
           ) : (
             <a
               href={buy.url}
               onClick={guardSize}
-              {...(buy.mode === "handoff"
-                ? { target: "_self" }
-                : {})}
               className="flex-1 bg-ink px-8 py-4 text-center text-[0.7rem] font-bold uppercase tracking-[0.22em] text-ivory transition-colors hover:bg-umber"
             >
-              In de winkeltas
+              {dict.product.addToBag}
               {priceLabel && (
-                <span className="ml-3 font-normal normal-case tracking-normal">
+                <span className="ms-3 font-normal normal-case tracking-normal">
                   {compareAtLabel && (
-                    <span className="mr-1.5 line-through opacity-60">{compareAtLabel}</span>
+                    <span className="me-1.5 line-through opacity-60">{compareAtLabel}</span>
                   )}
                   {priceLabel}
                 </span>
@@ -137,7 +137,7 @@ export default function BuyPanel({
               })
             }
             aria-pressed={wished}
-            aria-label={wished ? "Verwijder uit wishlist" : "Bewaar in wishlist"}
+            aria-label={wished ? dict.product.wishlistRemove : dict.product.wishlistAdd}
             className={`flex w-14 items-center justify-center border transition-colors ${
               wished ? "border-ink bg-ink text-ivory" : "border-sand hover:border-ink"
             }`}
@@ -147,8 +147,8 @@ export default function BuyPanel({
             </svg>
           </button>
         </div>
-        <p className="mt-3 text-center text-[0.7rem] text-taupe md:text-left">
-          Afrekenen verloopt via de beveiligde Ferganza-kassa.
+        <p className="mt-3 text-center text-[0.7rem] text-taupe md:text-start">
+          {dict.product.checkoutNote}
         </p>
       </div>
     </div>

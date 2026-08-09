@@ -4,23 +4,14 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useWishlist } from "@/lib/wishlist";
+import { LanguageSwitcher, useI18n } from "@/lib/i18n-client";
 
 export interface NavCategory {
   id: string;
-  name: string;
-  nameNl: string;
+  label: string;
   path: string;
-  children: { id: string; name: string; nameNl: string; path: string }[];
+  children: { id: string; label: string; path: string }[];
 }
-
-const NAV_LINKS = [
-  { label: "Shop", href: "/shop/" },
-  { label: "News", href: "/news/" },
-  { label: "About", href: "/about/" },
-];
-
-/** Short desktop-nav labels so the rail never crowds the wordmark. */
-const SHORT_LABELS: Record<string, string> = { "43501": "EID" };
 
 export default function Header({ categories }: { categories: NavCategory[] }) {
   const [scrolled, setScrolled] = useState(false);
@@ -31,6 +22,16 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
   const pathname = usePathname();
   const router = useRouter();
   const { items } = useWishlist();
+  const { locale, dict } = useI18n();
+
+  const navLinks = [
+    { label: dict.nav.news, href: "/news/" },
+    { label: dict.nav.about, href: "/about/" },
+  ];
+
+  /** Compact desktop label so the rail never crowds the wordmark. */
+  const shortLabel = (cat: NavCategory) =>
+    cat.id === "43501" ? (locale === "ar" ? "العيد" : "EID") : cat.label;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -71,11 +72,11 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
         }`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:h-20 md:px-8">
-          {/* left: burger (mobile) + primary nav (desktop) */}
+          {/* start side: burger (mobile) + primary nav (desktop) */}
           <div className="flex flex-1 items-center gap-6">
             <button
               onClick={() => setMenuOpen((v) => !v)}
-              aria-label={menuOpen ? "Sluit menu" : "Open menu"}
+              aria-label={menuOpen ? dict.nav.closeMenu : dict.nav.openMenu}
               aria-expanded={menuOpen}
               className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] lg:hidden"
             >
@@ -86,13 +87,13 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
                 className={`h-px w-5 bg-current transition-transform duration-300 ${menuOpen ? "-translate-y-[3px] -rotate-45" : ""}`}
               />
             </button>
-            <nav className="hidden items-center gap-6 lg:flex" aria-label="Hoofdmenu">
+            <nav className="hidden items-center gap-6 lg:flex" aria-label={dict.nav.mainMenu}>
               <Link
                 href="/shop/"
                 aria-current={pathname === "/shop/" ? "page" : undefined}
                 className="link-underline whitespace-nowrap text-[0.72rem] font-semibold uppercase tracking-[0.16em]"
               >
-                Shop
+                {dict.nav.shop}
               </Link>
               {categories.map((cat) => (
                 <div key={cat.id} className="group relative">
@@ -100,7 +101,7 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
                     href={cat.path}
                     className="link-underline whitespace-nowrap text-[0.72rem] font-semibold uppercase tracking-[0.16em]"
                   >
-                    {SHORT_LABELS[cat.id] ?? cat.name}
+                    {shortLabel(cat)}
                   </Link>
                   {cat.children.length > 0 && (
                     <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-5 opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100">
@@ -112,7 +113,7 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
                                 href={child.path}
                                 className="link-underline whitespace-nowrap text-sm text-ink-soft hover:text-ink"
                               >
-                                {child.nameNl}
+                                {child.label}
                               </Link>
                             </li>
                           ))}
@@ -134,10 +135,10 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
             FERGANZA
           </Link>
 
-          {/* right: secondary nav + search + wishlist */}
+          {/* end side: secondary nav + language + search + wishlist */}
           <div className="flex flex-1 items-center justify-end gap-2 md:gap-3">
-            <nav className="mr-3 hidden items-center gap-6 xl:flex" aria-label="Secundair menu">
-              {NAV_LINKS.slice(1).map((l) => (
+            <nav className="me-2 hidden items-center gap-6 xl:flex" aria-label={dict.nav.secondaryMenu}>
+              {navLinks.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
@@ -148,9 +149,12 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
                 </Link>
               ))}
             </nav>
+            <div className="hidden md:block">
+              <LanguageSwitcher />
+            </div>
             <button
               onClick={() => setSearchOpen(true)}
-              aria-label="Zoeken"
+              aria-label={dict.nav.search}
               className="flex h-10 w-10 items-center justify-center transition-opacity hover:opacity-60"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
@@ -160,7 +164,7 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
             </button>
             <Link
               href="/wishlist/"
-              aria-label={`Wishlist (${items.length})`}
+              aria-label={`${dict.nav.wishlist} (${items.length})`}
               className="relative flex h-10 w-10 items-center justify-center transition-opacity hover:opacity-60"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
@@ -193,7 +197,7 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
         >
           <form onSubmit={submitSearch} className="mx-auto max-w-3xl">
             <label htmlFor="site-search" className="eyebrow">
-              Zoeken
+              {dict.search.label}
             </label>
             <div className="mt-3 flex items-center gap-4 border-b border-ink pb-3">
               <input
@@ -202,11 +206,11 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Abaya, jurk, tas…"
+                placeholder={dict.search.placeholder}
                 className="w-full bg-transparent font-display text-3xl italic outline-none placeholder:text-clay md:text-4xl"
               />
               <button type="submit" className="eyebrow shrink-0 hover:text-ink">
-                Zoek
+                {dict.search.submit}
               </button>
             </div>
           </form>
@@ -223,7 +227,7 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
           onClick={() => setMenuOpen(false)}
         />
         <nav
-          aria-label="Mobiel menu"
+          aria-label={dict.nav.mobileMenu}
           className={`absolute inset-y-0 left-0 flex w-[85%] max-w-sm flex-col overflow-y-auto bg-ivory px-7 pb-10 pt-24 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             menuOpen ? "translate-x-0" : "-translate-x-full"
           }`}
@@ -232,14 +236,14 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
             {categories.map((cat) => (
               <li key={cat.id}>
                 <Link href={cat.path} className="font-display text-2xl">
-                  {cat.name}
+                  {cat.label}
                 </Link>
                 {cat.children.length > 0 && (
-                  <ul className="mt-3 space-y-2.5 border-l border-sand pl-4">
+                  <ul className="mt-3 space-y-2.5 border-s border-sand ps-4">
                     {cat.children.map((child) => (
                       <li key={child.id}>
                         <Link href={child.path} className="text-sm text-ink-soft">
-                          {child.nameNl}
+                          {child.label}
                         </Link>
                       </li>
                     ))}
@@ -249,18 +253,25 @@ export default function Header({ categories }: { categories: NavCategory[] }) {
             ))}
           </ul>
           <div className="mt-10 space-y-4 border-t border-sand pt-8">
-            {NAV_LINKS.concat([
-              { label: "Contact", href: "/contact/" },
-              { label: "Wishlist", href: "/wishlist/" },
-            ]).map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="block text-[0.75rem] font-semibold uppercase tracking-[0.18em]"
-              >
-                {l.label}
-              </Link>
-            ))}
+            {[{ label: dict.nav.shop, href: "/shop/" }]
+              .concat(navLinks)
+              .concat([
+                { label: dict.nav.contact, href: "/contact/" },
+                { label: dict.nav.wishlist, href: "/wishlist/" },
+              ])
+              .map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="block text-[0.75rem] font-semibold uppercase tracking-[0.18em]"
+                >
+                  {l.label}
+                </Link>
+              ))}
+          </div>
+          <div className="mt-10 border-t border-sand pt-8">
+            <p className="eyebrow mb-4">{dict.nav.language}</p>
+            <LanguageSwitcher variant="row" />
           </div>
         </nav>
       </div>

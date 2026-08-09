@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageShell from "@/components/PageShell";
 import { store } from "@/lib/commerce";
+import { getI18n } from "@/lib/i18n-server";
+import { fmt } from "@/lib/locale";
 
 export const metadata: Metadata = {
   title: "About us",
@@ -9,31 +11,23 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about/" },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const { dict } = await getI18n();
   return (
     <PageShell
-      eyebrow="Het huis"
+      eyebrow={dict.about.eyebrow}
       title={
         <>
-          Funky, fresh &{" "}
-          <em className="italic text-taupe">stylish</em> — sinds de
-          Kinkerstraat.
+          {dict.about.titlePre}
+          <em className="italic text-taupe">{dict.about.titleEm}</em>
+          {dict.about.titlePost}
         </>
       }
     >
+      <p>{fmt(dict.about.p1, { street: store.contact.address.street })}</p>
+      <p>{dict.about.p2}</p>
       <p>
-        Ferganza is een womenswear boutique in Amsterdam. In onze winkel aan de{" "}
-        {store.contact.address.street} stellen we een collectie samen die
-        trendy en tijdloos tegelijk is — van jurken, sets en tunieken tot
-        abayas, tassen en schoenen.
-      </p>
-      <p>
-        Elegant en draagbaar, met oog voor modest fashion: silhouetten die
-        kleden zonder in te leveren op stijl. De collectie wisselt met de
-        seizoenen; de smaak blijft.
-      </p>
-      <p>
-        Kom langs in de boutique of shop de collectie online — en volg ons op{" "}
+        {dict.about.p3pre}
         <a
           href={store.social.snapchat}
           target="_blank"
@@ -41,15 +35,15 @@ export default function AboutPage() {
           className="link-underline"
         >
           Snapchat
-        </a>{" "}
-        voor het laatste nieuws.
+        </a>
+        {dict.about.p3post}
       </p>
       <p>
         <Link
           href="/shop/"
           className="mt-4 inline-block bg-ink px-9 py-4 text-[0.7rem] font-bold uppercase tracking-[0.22em] text-ivory transition-colors hover:bg-umber"
         >
-          Naar de collectie
+          {dict.about.cta}
         </Link>
       </p>
     </PageShell>

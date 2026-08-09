@@ -2,15 +2,18 @@ import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/catalog";
 import { productPath } from "@/lib/urls";
+import { getI18n } from "@/lib/i18n-server";
+import { fmt } from "@/lib/locale";
 import SmartImage from "./SmartImage";
 
-export default function ProductCard({
+export default async function ProductCard({
   product,
   priority = false,
 }: {
   product: Product;
   priority?: boolean;
 }) {
+  const { dict } = await getI18n();
   const variant = product.variants[0];
   const primary = variant?.images[0] ?? product.images[0] ?? null;
   const secondary = variant?.images[1] ?? product.images[1] ?? null;
@@ -34,13 +37,13 @@ export default function ProductCard({
           </div>
         )}
         {compareAt && (
-          <span className="absolute left-3 top-3 bg-ink px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-ivory">
-            Sale
+          <span className="absolute start-3 top-3 bg-ink px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-ivory">
+            {dict.common.sale}
           </span>
         )}
         {soldOut && (
-          <span className="absolute left-3 top-3 bg-ivory/90 px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-ink">
-            Uitverkocht
+          <span className="absolute start-3 top-3 bg-ivory/90 px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-ink">
+            {dict.common.soldOut}
           </span>
         )}
       </div>
@@ -49,14 +52,16 @@ export default function ProductCard({
         {price && (
           <p className="shrink-0 text-sm text-ink-soft">
             {compareAt && (
-              <span className="mr-2 text-clay line-through">{compareAt}</span>
+              <span className="me-2 text-clay line-through">{compareAt}</span>
             )}
             {price}
           </p>
         )}
       </div>
       {colorCount > 1 && (
-        <p className="mt-0.5 text-xs text-taupe">{colorCount} kleuren</p>
+        <p className="mt-0.5 text-xs text-taupe">
+          {fmt(dict.common.colors, { n: colorCount })}
+        </p>
       )}
     </Link>
   );

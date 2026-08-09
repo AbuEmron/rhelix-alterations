@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageShell from "@/components/PageShell";
+import { getI18n } from "@/lib/i18n-server";
 
 export const metadata: Metadata = {
   title: "Klantenservice",
@@ -8,18 +9,18 @@ export const metadata: Metadata = {
   alternates: { canonical: "/information/" },
 };
 
-const SECTIONS = [
-  { title: "Veelgestelde vragen", href: "/information/faq/", body: "Antwoorden op de meest gestelde vragen." },
-  { title: "Verzending", href: "/information/verzending/", body: "Verzendmethoden, levertijden en tracking." },
-  { title: "Retourneren", href: "/information/returns/", body: "Zo meld je een retour aan." },
-  { title: "Contact", href: "/contact/", body: "De boutique, e-mail en social kanalen." },
-];
-
-export default function InformationPage() {
+export default async function InformationPage() {
+  const { dict } = await getI18n();
+  const sections = [
+    { title: dict.info.faqTitle, href: "/information/faq/", body: dict.info.faqBody },
+    { title: dict.info.shippingTitle, href: "/information/verzending/", body: dict.info.shippingBody },
+    { title: dict.info.returnsTitle, href: "/information/returns/", body: dict.info.returnsBody },
+    { title: dict.info.contactTitle, href: "/contact/", body: dict.info.contactBody },
+  ];
   return (
-    <PageShell eyebrow="Service" title="Klantenservice">
+    <PageShell eyebrow={dict.info.eyebrow} title={dict.info.title}>
       <ul className="grid gap-4 md:grid-cols-2">
-        {SECTIONS.map((s) => (
+        {sections.map((s) => (
           <li key={s.href}>
             <Link
               href={s.href}

@@ -1,28 +1,30 @@
 import Link from "next/link";
 import { store } from "@/lib/commerce";
+import { getI18n } from "@/lib/i18n-server";
+import { fmt } from "@/lib/locale";
 
-const SHOP_LINKS = [
-  { label: "Alles", href: "/shop/" },
-  { label: "Kleding", href: "/ferganza-womens-fashion/groups/clothing/337/" },
-  { label: "EID Collectie", href: "/ferganza-womens-fashion/groups/eid+collection/43501+337/" },
-  { label: "Accessoires", href: "/ferganza-womens-fashion/groups/accessories/400/" },
-  { label: "Schoenen", href: "/ferganza-womens-fashion/groups/shoes/696/" },
-];
+export default async function Footer() {
+  const { dict } = await getI18n();
 
-const SERVICE_LINKS = [
-  { label: "Veelgestelde vragen", href: "/information/faq/" },
-  { label: "Verzending", href: "/information/verzending/" },
-  { label: "Retourneren", href: "/information/returns/" },
-  { label: "Contact", href: "/contact/" },
-];
+  const shopLinks = [
+    { label: dict.footer.linkAll, href: "/shop/" },
+    { label: dict.categories["337"], href: "/ferganza-womens-fashion/groups/clothing/337/" },
+    { label: dict.categories["43501"], href: "/ferganza-womens-fashion/groups/eid+collection/43501+337/" },
+    { label: dict.categories["400"], href: "/ferganza-womens-fashion/groups/accessories/400/" },
+    { label: dict.categories["696"], href: "/ferganza-womens-fashion/groups/shoes/696/" },
+  ];
+  const serviceLinks = [
+    { label: dict.footer.linkFaq, href: "/information/faq/" },
+    { label: dict.footer.linkShipping, href: "/information/verzending/" },
+    { label: dict.footer.linkReturns, href: "/information/returns/" },
+    { label: dict.nav.contact, href: "/contact/" },
+  ];
+  const houseLinks = [
+    { label: dict.nav.about, href: "/about/" },
+    { label: dict.nav.news, href: "/news/" },
+    { label: dict.nav.wishlist, href: "/wishlist/" },
+  ];
 
-const HOUSE_LINKS = [
-  { label: "About us", href: "/about/" },
-  { label: "News", href: "/news/" },
-  { label: "Wishlist", href: "/wishlist/" },
-];
-
-export default function Footer() {
   return (
     <footer className="mt-24 bg-ink text-ivory">
       <div className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-20">
@@ -30,7 +32,7 @@ export default function Footer() {
           <div className="md:col-span-5">
             <p className="font-display text-3xl tracking-[0.28em]">FERGANZA</p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ivory/60">
-              Womens fashion boutique — Amsterdam.
+              {dict.footer.tagline}
             </p>
             <address className="mt-6 text-sm not-italic leading-relaxed text-ivory/60">
               {store.contact.address.street}
@@ -59,9 +61,9 @@ export default function Footer() {
 
           {(
             [
-              ["Shop", SHOP_LINKS],
-              ["Klantenservice", SERVICE_LINKS],
-              ["Het huis", HOUSE_LINKS],
+              [dict.footer.shopHeading, shopLinks],
+              [dict.footer.serviceHeading, serviceLinks],
+              [dict.footer.houseHeading, houseLinks],
             ] as const
           ).map(([title, links]) => (
             <nav key={title} aria-label={title} className="md:col-span-2">
@@ -83,12 +85,16 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-3 border-t border-ivory/10 pt-8 text-xs text-ivory/40 md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} FERGANZA. Alle rechten voorbehouden.</p>
           <p>
-            Verzending met {store.shipping.carriers.join(" & ")} · EU levering{" "}
-            {store.shipping.euDeliveryDays}
+            © {new Date().getFullYear()} FERGANZA. {dict.footer.rights}
           </p>
-          <p>Digital experience — {store.credits.studio}</p>
+          <p>
+            {fmt(dict.footer.shippingLine, {
+              carriers: store.shipping.carriers.join(" & "),
+              days: store.shipping.euDeliveryDays,
+            })}
+          </p>
+          <p>{fmt(dict.footer.credit, { studio: store.credits.studio })}</p>
         </div>
       </div>
     </footer>

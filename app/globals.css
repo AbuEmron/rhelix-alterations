@@ -32,6 +32,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Arabic: pair the Latin serif with Amiri so display type keeps its
+   editorial voice in RTL; line-height opens up for Arabic ascenders */
+html[lang="ar"] .headline,
+html[lang="ar"] .font-display {
+  font-family: "Amiri", var(--font-display);
+  line-height: 1.3;
+}
+html[lang="ar"] .headline {
+  letter-spacing: 0;
+}
+
 body {
   background: var(--color-ivory);
   color: var(--color-ink);

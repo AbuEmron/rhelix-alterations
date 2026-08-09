@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import { store } from "@/lib/commerce";
+import { getI18n } from "@/lib/i18n-server";
+import { fmt } from "@/lib/locale";
 
 export const metadata: Metadata = {
   title: "Returns",
@@ -8,21 +10,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/information/returns/" },
 };
 
-export default function ReturnsPage() {
+export default async function ReturnsPage() {
+  const { dict } = await getI18n();
   return (
-    <PageShell eyebrow="Service" title="Retourneren">
-      <p>
-        Wil je een bestelling (deels) retourneren? Meld je retour aan per
-        e-mail via{" "}
-        <a href={`mailto:${store.contact.email}`} className="link-underline">
-          {store.contact.email}
-        </a>{" "}
-        met je ordernummer, dan ontvang je van ons de retourinstructies.
-      </p>
-      <p>
-        Het volledige retourbeleid van de winkel is en blijft van toepassing;
-        neem bij twijfel altijd eerst contact op — we helpen je graag.
-      </p>
+    <PageShell eyebrow={dict.info.eyebrow} title={dict.info.returnsTitle}>
+      <p>{fmt(dict.info.retP1, { email: store.contact.email })}</p>
+      <p>{dict.info.retP2}</p>
     </PageShell>
   );
 }

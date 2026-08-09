@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ShopIndex from "@/components/ShopIndex";
+import { getI18n } from "@/lib/i18n-server";
+import { fmt } from "@/lib/locale";
 
 interface Props {
   params: Promise<{ n: string }>;
@@ -8,8 +10,9 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { n } = await params;
+  const { dict } = await getI18n();
   return {
-    title: `Shop — pagina ${n}`,
+    title: fmt(dict.shop.pageTitle, { n }),
     alternates: { canonical: `/shop/page/${n}/` },
   };
 }

@@ -32,6 +32,17 @@ Design & build: **The Quiet Few Collective**. Brand: **FERGANZA**.
   (`NEXT_PUBLIC_LEGACY_ORIGIN`). The secure platform cart/checkout/account
   flow is untouched.
 
+## Languages
+
+The storefront speaks **Dutch (default), English, Spanish and Arabic** — the
+switcher lives in the header (globe menu) and in the mobile drawer. Arabic
+renders fully right-to-left with the Amiri serif for display type. The choice
+is stored in a cookie, so **every preserved URL is byte-identical in every
+language** — no `/en/` prefixes, no duplicate routes, no redirects. UI chrome,
+editorial copy and service pages are translated; merchandise data (product
+names, descriptions, prices) is preserved store content and is never
+machine-translated. Dictionaries live in `lib/dictionaries.ts`.
+
 ## The experience
 
 New homepage, navigation (desktop mega-menu + mobile drawer), editorial

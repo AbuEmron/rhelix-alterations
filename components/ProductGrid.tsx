@@ -1,20 +1,24 @@
 import type { Product } from "@/lib/types";
+import { getI18n } from "@/lib/i18n-server";
 import ProductCard from "./ProductCard";
 import Reveal from "./Reveal";
 
-export default function ProductGrid({
+export default async function ProductGrid({
   products,
-  emptyMessage = "Nieuwe items volgen binnenkort.",
+  emptyMessage,
   priorityCount = 0,
 }: {
   products: Product[];
   emptyMessage?: string;
   priorityCount?: number;
 }) {
+  const { dict } = await getI18n();
   if (products.length === 0) {
     return (
       <div className="border border-sand px-6 py-24 text-center">
-        <p className="font-display text-2xl italic text-taupe">{emptyMessage}</p>
+        <p className="font-display text-2xl italic text-taupe">
+          {emptyMessage ?? dict.common.gridEmpty}
+        </p>
       </div>
     );
   }

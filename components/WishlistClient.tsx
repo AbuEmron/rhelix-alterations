@@ -3,25 +3,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useWishlist } from "@/lib/wishlist";
+import { useI18n } from "@/lib/i18n-client";
 
 export default function WishlistClient() {
   const { items, remove } = useWishlist();
+  const { dict } = useI18n();
 
   return (
     <div className="mx-auto max-w-7xl px-4 pb-16 pt-28 md:px-8 md:pt-36">
-      <p className="eyebrow">Bewaard</p>
-      <h1 className="headline mt-4 text-5xl md:text-7xl">Wishlist</h1>
+      <p className="eyebrow">{dict.wishlist.eyebrow}</p>
+      <h1 className="headline mt-4 text-5xl md:text-7xl">{dict.wishlist.title}</h1>
 
       {items.length === 0 ? (
         <div className="mt-14 border border-sand px-6 py-24 text-center">
           <p className="font-display text-2xl italic text-taupe">
-            Nog niets bewaard.
+            {dict.wishlist.empty}
           </p>
           <Link
             href="/shop/"
             className="mt-8 inline-block bg-ink px-9 py-4 text-[0.7rem] font-bold uppercase tracking-[0.22em] text-ivory transition-colors hover:bg-umber"
           >
-            Ontdek de collectie
+            {dict.wishlist.discover}
           </Link>
         </div>
       ) : (
@@ -63,7 +65,7 @@ export default function WishlistClient() {
                 onClick={() => remove(item.variantId)}
                 className="link-underline mt-2 text-xs text-taupe hover:text-ink"
               >
-                Verwijderen
+                {dict.wishlist.remove}
               </button>
             </li>
           ))}

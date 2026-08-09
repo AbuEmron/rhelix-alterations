@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import { store } from "@/lib/commerce";
+import { getI18n } from "@/lib/i18n-server";
+import { fmt } from "@/lib/locale";
 
 export const metadata: Metadata = {
   title: "Verzending",
@@ -8,23 +10,18 @@ export const metadata: Metadata = {
   alternates: { canonical: "/information/verzending/" },
 };
 
-export default function VerzendingPage() {
+export default async function VerzendingPage() {
+  const { dict } = await getI18n();
+  const vars = {
+    carriers: store.shipping.carriers.join(" / "),
+    days: store.shipping.euDeliveryDays,
+    email: store.contact.email,
+  };
   return (
-    <PageShell eyebrow="Service" title="Verzending">
-      <p>
-        Zodra je een bestelling plaatst, ontvang je een bevestiging per e-mail.
-        We verzenden met {store.shipping.carriers.join(" of ")}.
-      </p>
-      <p>
-        Levering binnen de EU duurt {store.shipping.euDeliveryDays}.
-      </p>
-      <p>
-        Vragen over je zending? Mail{" "}
-        <a href={`mailto:${store.contact.email}`} className="link-underline">
-          {store.contact.email}
-        </a>{" "}
-        met je ordernummer — we zoeken het direct voor je uit.
-      </p>
+    <PageShell eyebrow={dict.info.eyebrow} title={dict.info.shippingTitle}>
+      <p>{fmt(dict.info.shipP1, vars)}</p>
+      <p>{fmt(dict.info.shipP2, vars)}</p>
+      <p>{fmt(dict.info.shipP3, vars)}</p>
     </PageShell>
   );
 }

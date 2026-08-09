@@ -10,13 +10,14 @@ import {
   getVariant,
 } from "@/lib/catalog";
 import { parseProductSegments } from "@/lib/urls";
-import { buyTarget } from "@/lib/commerce";
+import { buyTarget, store } from "@/lib/commerce";
+import { categoryLabel, getI18n } from "@/lib/i18n-server";
+import { fmt } from "@/lib/locale";
 import Gallery from "@/components/Gallery";
 import BuyPanel from "@/components/BuyPanel";
 import Accordion from "@/components/Accordion";
 import ProductGrid from "@/components/ProductGrid";
 import Reveal from "@/components/Reveal";
-import { store } from "@/lib/commerce";
 
 /**
  * Existing product URL contract, preserved verbatim:
@@ -66,6 +67,7 @@ export default async function ProductPage({ params }: Props) {
   const res = resolve(segments);
   if (!res) notFound();
   const { product, variant } = res;
+  const { locale, dict } = await getI18n();
 
   const images = variant.images.length ? variant.images : product.images;
   const price = variant.price ?? product.price;
@@ -75,6 +77,15 @@ export default async function ProductPage({ params }: Props) {
     .map((id) => getCategoryById(id))
     .find((c) => c && c.id !== "337");
   const related = getRelatedProducts(product);
+
+  const shippingVars = {
+    carriers: store.shipping.carriers.join(" / "),
+    days: store.shipping.euDeliveryDays,
+  };
+  const addressVars = {
+    street: store.contact.address.street,
+    city: store.contact.address.city,
+  };
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -106,21 +117,21 @@ export default async function ProductPage({ params }: Props) {
       />
 
       {/* breadcrumb */}
-      <nav aria-label="Kruimelpad" className="mb-8 text-xs text-taupe">
+      <nav aria-label={dict.common.breadcrumb} className="mb-8 text-xs text-taupe">
         <ol className="flex flex-wrap items-center gap-2">
           <li>
-            <Link href="/" className="hover:text-ink">Home</Link>
+            <Link href="/" className="hover:text-ink">{dict.common.home}</Link>
           </li>
           <li aria-hidden>/</li>
           <li>
-            <Link href="/shop/" className="hover:text-ink">Shop</Link>
+            <Link href="/shop/" className="hover:text-ink">{dict.nav.shop}</Link>
           </li>
           {category && (
             <>
               <li aria-hidden>/</li>
               <li>
                 <Link href={category.path} className="hover:text-ink">
-                  {category.nameNl}
+                  {categoryLabel(dict, locale, category)}
                 </Link>
               </li>
             </>
@@ -137,7 +148,9 @@ export default async function ProductPage({ params }: Props) {
 
         <div className="md:col-span-5">
           <div className="md:sticky md:top-28">
-            {category && <p className="eyebrow">{category.nameNl}</p>}
+            {category && (
+              <p className="eyebrow">{categoryLabel(dict, locale, category)}</p>
+            )}
             <h1 className="headline mt-3 text-4xl md:text-5xl">{product.name}</h1>
             {variant.color && (
               <p className="mt-2 text-sm text-ink-soft">{variant.color}</p>
@@ -145,13 +158,13 @@ export default async function ProductPage({ params }: Props) {
             {priceLabel ? (
               <p className="mt-5 text-lg">
                 {compareAtLabel && (
-                  <span className="mr-3 text-clay line-through">{compareAtLabel}</span>
+                  <span className="me-3 text-clay line-through">{compareAtLabel}</span>
                 )}
                 {priceLabel}
               </p>
             ) : (
               <p className="mt-5 text-sm italic text-taupe">
-                Actuele prijs in de winkeltas
+                {dict.product.priceOnCheckout}
               </p>
             )}
 
@@ -167,29 +180,27 @@ export default async function ProductPage({ params }: Props) {
               <Accordion
                 items={[
                   ...(product.description
-                    ? [{ title: "Beschrijving", content: <p>{product.description}</p> }]
+                    ? [{ title: dict.product.accDescription, content: <p>{product.description}</p> }]
                     : []),
                   {
-                    title: "Verzending",
+                    title: dict.product.accShipping,
                     content: (
                       <p>
-                        Bestellingen worden verzonden met{" "}
-                        {store.shipping.carriers.join(" of ")}. Levering binnen de
-                        EU duurt {store.shipping.euDeliveryDays}.{" "}
+                        {fmt(dict.product.accShippingBody, shippingVars)}{" "}
                         <Link href="/information/verzending/" className="link-underline">
-                          Meer over verzending
+                          {dict.product.accShippingLink}
                         </Link>
                       </p>
                     ),
                   },
                   {
-                    title: "Retourneren",
+                    title: dict.product.accReturns,
                     content: (
                       <p>
                         <Link href="/information/returns/" className="link-underline">
-                          Bekijk het retourbeleid
+                          {dict.product.accReturnsLink}
                         </Link>{" "}
-                        — of mail{" "}
+                        {dict.product.accReturnsOr}{" "}
                         <a href={`mailto:${store.contact.email}`} className="link-underline">
                           {store.contact.email}
                         </a>
@@ -198,13 +209,8 @@ export default async function ProductPage({ params }: Props) {
                     ),
                   },
                   {
-                    title: "De boutique",
-                    content: (
-                      <p>
-                        Ook te passen in onze winkel: {store.contact.address.street},{" "}
-                        {store.contact.address.city}.
-                      </p>
-                    ),
+                    title: dict.product.accBoutique,
+                    content: <p>{fmt(dict.product.accBoutiqueBody, addressVars)}</p>,
                   },
                 ]}
               />
@@ -217,7 +223,9 @@ export default async function ProductPage({ params }: Props) {
         <section className="mt-24 md:mt-32">
           <Reveal>
             <h2 className="headline mb-10 text-3xl md:text-4xl">
-              Combineert <em className="italic text-taupe">mooi</em> met
+              {dict.product.relatedPre}
+              <em className="italic text-taupe">{dict.product.relatedEm}</em>
+              {dict.product.relatedPost}
             </h2>
           </Reveal>
           <ProductGrid products={related.slice(0, 4)} />

@@ -7,6 +7,8 @@ import {
   getProductsByCategory,
 } from "@/lib/catalog";
 import { groupPagePath, parseGroupSegments } from "@/lib/urls";
+import { categoryLabel, getI18n } from "@/lib/i18n-server";
+import { fmt } from "@/lib/locale";
 import ProductGrid from "@/components/ProductGrid";
 import SmartImage from "@/components/SmartImage";
 import Reveal from "@/components/Reveal";
@@ -51,6 +53,7 @@ export default async function GroupPage({ params, searchParams }: Props) {
   const res = resolve(segments);
   if (!res) notFound();
   const { category, page } = res;
+  const { locale, dict } = await getI18n();
 
   const children = getChildCategories(category.id).filter((c) => c.id !== category.id);
   let products = getProductsByCategory(category.id);
@@ -99,10 +102,12 @@ export default async function GroupPage({ params, searchParams }: Props) {
         )}
         <div className="relative mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-24">
           <Reveal>
-            <p className="eyebrow">Collectie</p>
+            <p className="eyebrow">{dict.collection.eyebrow}</p>
           </Reveal>
           <Reveal delay={100}>
-            <h1 className="headline mt-4 text-5xl md:text-7xl">{category.nameNl}</h1>
+            <h1 className="headline mt-4 text-5xl md:text-7xl">
+              {categoryLabel(dict, locale, category)}
+            </h1>
           </Reveal>
           {category.description && (
             <Reveal delay={200}>
@@ -120,7 +125,7 @@ export default async function GroupPage({ params, searchParams }: Props) {
                     href={c.path}
                     className="border border-ink/20 bg-ivory/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] backdrop-blur transition-colors hover:border-ink hover:bg-ink hover:text-ivory"
                   >
-                    {c.nameNl}
+                    {categoryLabel(dict, locale, c)}
                   </Link>
                 ))}
               </div>
@@ -139,7 +144,7 @@ export default async function GroupPage({ params, searchParams }: Props) {
                 !kleur ? "border-ink bg-ink text-ivory" : "border-sand hover:border-ink"
               }`}
             >
-              Alle kleuren
+              {dict.collection.allColors}
             </Link>
             {colors.map((c) => (
               <Link
@@ -155,14 +160,14 @@ export default async function GroupPage({ params, searchParams }: Props) {
               </Link>
             ))}
           </div>
-          <nav aria-label="Sorteren" className="flex items-center gap-3 text-xs">
-            <span className="text-taupe">Sorteer:</span>
+          <nav aria-label={dict.collection.sortLabel} className="flex items-center gap-3 text-xs">
+            <span className="text-taupe">{dict.collection.sortLabel}</span>
             {(
               [
-                ["nieuw", undefined, "Nieuw"],
-                ["prijs-op", "prijs-op", "Prijs ↑"],
-                ["prijs-af", "prijs-af", "Prijs ↓"],
-                ["naam", "naam", "A–Z"],
+                ["nieuw", undefined, dict.collection.sortNew],
+                ["prijs-op", "prijs-op", dict.collection.sortPriceAsc],
+                ["prijs-af", "prijs-af", dict.collection.sortPriceDesc],
+                ["naam", "naam", dict.collection.sortAz],
               ] as const
             ).map(([key, value, label]) => (
               <Link
@@ -180,14 +185,16 @@ export default async function GroupPage({ params, searchParams }: Props) {
 
         <div className="py-10 md:py-14">
           <p className="mb-8 text-xs uppercase tracking-[0.15em] text-taupe">
-            {products.length} {products.length === 1 ? "item" : "items"}
+            {products.length === 1
+              ? dict.common.itemOne
+              : fmt(dict.common.itemMany, { n: products.length })}
           </p>
           <ProductGrid products={pageItems} priorityCount={4} />
         </div>
 
         {/* pagination — same /page/{n}/ URL shape the platform used */}
         {totalPages > 1 && (
-          <nav aria-label="Paginering" className="flex items-center justify-center gap-2 pb-16">
+          <nav aria-label={dict.common.pagination} className="flex items-center justify-center gap-2 pb-16">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
               <Link
                 key={n}
