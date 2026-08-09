@@ -1,0 +1,25 @@
+{
+  "brand": "FERGANZA",
+  "tagline": "Womens Fashion — Amsterdam",
+  "origin": "https://www.ferganza.com",
+  "contact": {
+    "email": "info@ferganza.com",
+    "address": {
+      "street": "Kinkerstraat 237",
+      "postalCode": "1053 EP",
+      "city": "Amsterdam",
+      "country": "Netherlands"
+    }
+  },
+  "shipping": {
+    "carriers": ["DHL", "PostNL"],
+    "euDeliveryDays": "3–6 business days"
+  },
+  "social": {
+    "snapchat": "https://www.snapchat.com/@ferganza"
+  },
+  "credits": {
+    "studio": "The Quiet Few Collective",
+    "platform": "AWINK Websolutions"
+  }
+}

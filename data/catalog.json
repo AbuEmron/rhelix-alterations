@@ -1,0 +1,286 @@
+{
+  "meta": {
+    "source": "search-index-bootstrap",
+    "origin": "https://www.ferganza.com",
+    "syncedAt": null,
+    "bootstrappedAt": "2026-08-09",
+    "verified": false,
+    "note": "Bootstrap catalog assembled from search-engine-indexed ferganza.com URLs and metadata. Every entry is a real Ferganza product at its real public URL. Prices carry priceSource and MUST be re-verified by `npm run sync` against the live store before launch. Fields that could not be verified are null — never invented. Images are captured by sync; none are bundled here.",
+    "currency": "EUR"
+  },
+  "categories": [
+    { "id": "337", "slugs": ["clothing", "kleding"], "name": "Clothing", "nameNl": "Kleding", "parentId": null, "path": "/ferganza-womens-fashion/groups/clothing/337/" },
+    { "id": "385", "slugs": ["dresses-skirts", "jurken"], "name": "Dresses & Skirts", "nameNl": "Jurken", "parentId": "337", "path": "/ferganza-womens-fashion/groups/dresses-skirts+clothing/385+337/" },
+    { "id": "848", "slugs": ["sets"], "name": "Sets", "nameNl": "Sets", "parentId": "337", "path": "/ferganza-womens-fashion/groups/sets+clothing/848+337/" },
+    { "id": "370", "slugs": ["tunics", "tunieken"], "name": "Tunics", "nameNl": "Tunieken", "parentId": "337", "path": "/ferganza-womens-fashion/groups/tunieken+clothing/370+337/" },
+    { "id": "379", "slugs": ["jassen-blazers", "blazers-jassen"], "name": "Jackets & Coats", "nameNl": "Jassen & Blazers", "parentId": "337", "path": "/ferganza-womens-fashion/groups/jassen-blazers+clothing/379+337/" },
+    { "id": "56020", "slugs": ["blazers"], "name": "Blazers", "nameNl": "Blazers", "parentId": "337", "path": "/ferganza-womens-fashion/groups/blazers+clothing/56020+337/" },
+    { "id": "396", "slugs": ["vesten-kimono", "vests-kimono"], "name": "Vests & Kimonos", "nameNl": "Vesten & Kimono's", "parentId": "337", "path": "/ferganza-womens-fashion/groups/vesten-kimono+clothing/396+337/" },
+    { "id": "25650", "slugs": ["burkini"], "name": "Burkini", "nameNl": "Burkini", "parentId": "337", "path": "/ferganza-womens-fashion/groups/burkini+clothing/25650+337/" },
+    { "id": "43501", "slugs": ["eid", "abaya", "abayas", "eid-collectie", "eid-collection"], "name": "EID Collection", "nameNl": "EID Collectie", "parentId": "337", "path": "/ferganza-womens-fashion/groups/eid+collection/43501+337/" },
+    { "id": "400", "slugs": ["accessories", "accessoires"], "name": "Accessories", "nameNl": "Accessoires", "parentId": null, "path": "/ferganza-womens-fashion/groups/accessories/400/" },
+    { "id": "401", "slugs": ["tassen", "bags"], "name": "Bags", "nameNl": "Tassen", "parentId": "400", "path": "/ferganza-womens-fashion/groups/tassen+accessories/401+400/" },
+    { "id": "696", "slugs": ["shoes", "schoenen"], "name": "Shoes", "nameNl": "Schoenen", "parentId": null, "path": "/ferganza-womens-fashion/groups/shoes/696/" }
+  ],
+  "pendingCategoryIds": ["30198", "50107", "4236", "361", "5172", "338", "955", "421", "415", "411"],
+  "knownUnmappedCategoryNames": ["Tops", "Blouses", "Broeken", "Truien", "Haaraccessoires", "Sieraden", "Riemen", "Shawls & Beanies", "Sale"],
+  "products": [
+    {
+      "id": "61404", "slug": "jurk-peach", "name": "Jurk Peach", "description": null,
+      "price": 69.99, "compareAtPrice": null, "priceSource": "search-index-2026-08-09",
+      "categoryIds": ["385", "337"], "images": [],
+      "variants": [
+        { "id": "61405", "slug": "jurk-peach", "name": "Jurk Peach", "color": null, "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/jurk-peach/61404/jurk-peach/61405/5547/337/" }
+      ]
+    },
+    {
+      "id": "61317", "slug": "dress-floral", "name": "Dress Floral", "description": null,
+      "price": 64.99, "compareAtPrice": null, "priceSource": "search-index-2026-08-09",
+      "categoryIds": ["385", "337"], "images": [],
+      "variants": [
+        { "id": "61318", "slug": "dress-floral", "name": "Dress Floral", "color": null, "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/dress-floral/61317/dress-floral/61318/5537/337/" }
+      ]
+    },
+    {
+      "id": "59351", "slug": "jurk-acacia", "name": "Dress Acacia", "description": null,
+      "price": 69.99, "compareAtPrice": null, "priceSource": "search-index-2026-08-09",
+      "categoryIds": ["385", "337"], "images": [],
+      "variants": [
+        { "id": "59352", "slug": "jurk-acacia---mauve", "name": "Jurk Acacia - Mauve", "color": "Mauve", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/jurk-acacia/59351/jurk-acacia---mauve/59352/5304/" }
+      ]
+    },
+    {
+      "id": "53873", "slug": "jurk-eloise", "name": "Jurk Eloise", "description": null,
+      "price": 34.99, "compareAtPrice": 44.99, "priceSource": "search-index-2026-08-09",
+      "categoryIds": ["385", "337"], "images": [],
+      "variants": [
+        { "id": "53874", "slug": "jurk-eloise", "name": "Jurk Eloise", "color": null, "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/jurk-eloise/53873/jurk-eloise/53874/4714/" }
+      ]
+    },
+    {
+      "id": "45113", "slug": "jurk-delphine", "name": "Jurk Delphine", "description": null,
+      "price": 49.99, "compareAtPrice": null, "priceSource": "search-index-2026-08-09",
+      "categoryIds": ["385", "337"], "images": [],
+      "variants": [
+        { "id": "49081", "slug": "dress-delphine---emerald-green", "name": "Dress Delphine - Emerald Green", "color": "Emerald Green", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/jurk-delphine/45113/dress-delphine---emerald-green/49081/4183/" }
+      ]
+    },
+    {
+      "id": "50120", "slug": "joggingjurk-zena", "name": "Joggingjurk Zena", "description": null,
+      "price": 44.99, "compareAtPrice": null, "priceSource": "search-index-2026-08-09",
+      "categoryIds": ["385", "337"], "images": [],
+      "variants": [
+        { "id": "50121", "slug": "joggingjurk-zena", "name": "Joggingjurk Zena", "color": null, "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/joggingjurk-zena/50120/joggingjurk-zena/50121/4323/" }
+      ]
+    },
+    {
+      "id": "34420", "slug": "t-shirt-jurk", "name": "T-shirt Jurk", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["385", "337"], "images": [],
+      "variants": [
+        { "id": "34421", "slug": "t-shirt-jurk--zwart", "name": "T-shirt Jurk - Zwart", "color": "Zwart", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/t-shirt-jurk/34420/t-shirt-jurk--zwart/34421/3525/" }
+      ]
+    },
+    {
+      "id": "52521", "slug": "jurk-maya", "name": "Dress Maya", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["385", "337"], "images": [],
+      "variants": [
+        { "id": "52523", "slug": "dress-maya---bruin", "name": "Dress Maya - Bruin", "color": "Bruin", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/jurk-maya/52521/dress-maya---bruin/52523/4679/" }
+      ]
+    },
+    {
+      "id": "12874", "slug": "blouse-mabel", "name": "Blouse Mabel", "description": null,
+      "price": 25.99, "compareAtPrice": null, "priceSource": "search-index-2026-08-09",
+      "categoryIds": ["337"], "images": [],
+      "variants": [
+        { "id": "13056", "slug": "blouse-mabel---taupe", "name": "Blouse Mabel - Taupe", "color": "Taupe", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/blouse-mabel/12874/blouse-mabel---taupe/13056/1946/" }
+      ]
+    },
+    {
+      "id": "61985", "slug": "top-safira", "name": "Top Safira", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["337"], "images": [],
+      "variants": [
+        { "id": "61986", "slug": "top-safira---bruin", "name": "Top Safira - Bruin", "color": "Bruin", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/top-safira/61985/top-safira---bruin/61986/5559/337/" }
+      ]
+    },
+    {
+      "id": "48635", "slug": "top-lace", "name": "Top Lace", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["337"], "images": [],
+      "variants": [
+        { "id": "48636", "slug": "top-lace", "name": "Top Lace", "color": null, "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/top-lace/48635/top-lace/48636/4176/" }
+      ]
+    },
+    {
+      "id": "51378", "slug": "leren-broek-nelly", "name": "Leren Broek Nelly", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["337"], "images": [],
+      "variants": [
+        { "id": "51380", "slug": "leren-broek-nelly---bruin", "name": "Leren Broek Nelly - Bruin", "color": "Bruin", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/leren-broek-nelly/51378/leren-broek-nelly---bruin/51380/4437/337/" }
+      ]
+    },
+    {
+      "id": "50114", "slug": "joggingpants-donna", "name": "Joggingpants Donna", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["337"], "images": [],
+      "variants": [
+        { "id": "50115", "slug": "joggingpants-donna---zwart", "name": "Joggingpants Donna - Zwart", "color": "Zwart", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/joggingpants-donna/50114/joggingpants-donna---zwart/50115/4312/" }
+      ]
+    },
+    {
+      "id": "33506", "slug": "set-rihanna", "name": "Set Rihanna", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["848", "337"], "images": [],
+      "variants": [
+        { "id": "34318", "slug": "set-rihanna---groen", "name": "Set Rihanna - Groen", "color": "Groen", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/set-rihanna/33506/set-rihanna---groen/34318/3523/" },
+        { "id": "33514", "slug": "set-rihanna---zwart", "name": "Set Rihanna - Zwart", "color": "Zwart", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/set-rihanna/33506/set-rihanna---zwart/33514/3514/" }
+      ]
+    },
+    {
+      "id": "7113", "slug": "suit-mona", "name": "Set Mona", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["848", "337"], "images": [],
+      "variants": [
+        { "id": "7114", "slug": "suit-mona---black", "name": "Set Mona - Black", "color": "Black", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/suit-mona/7113/suit-mona---black/7114/1181/" }
+      ]
+    },
+    {
+      "id": "53882", "slug": "jumpsuit-cleo", "name": "Jumpsuit Cleo", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["848", "337"], "images": [],
+      "variants": [
+        { "id": "53883", "slug": "jumpsuit-cleo", "name": "Jumpsuit Cleo", "color": null, "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/jumpsuit-cleo/53882/jumpsuit-cleo/53883/4728/" }
+      ]
+    },
+    {
+      "id": "47966", "slug": "set-lasera", "name": "Set Lasera", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["848", "337"], "images": [],
+      "variants": [
+        { "id": "48020", "slug": "set-lasera---zwart", "name": "Set Lasera - Zwart", "color": "Zwart", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/set-lasera/47966/set-lasera---zwart/48020/4161/" }
+      ]
+    },
+    {
+      "id": "56731", "slug": "set-coletta", "name": "Set Coletta", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["848", "337"], "images": [],
+      "variants": [
+        { "id": "56733", "slug": "set-coletta---grijs", "name": "Set Coletta - Grijs", "color": "Grijs", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/set-coletta/56731/set-coletta---grijs/56733/4923/" }
+      ]
+    },
+    {
+      "id": "52525", "slug": "abaya-zaina", "name": "Abaya Zaina", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["43501", "337"], "images": [],
+      "variants": [
+        { "id": "52526", "slug": "abaya-zaina---bruin", "name": "Abaya Zaina - Bruin", "color": "Bruin", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/abaya-zaina/52525/abaya-zaina---bruin/52526/4682/" }
+      ]
+    },
+    {
+      "id": "58040", "slug": "abaya-aicha", "name": "Abaya Aicha", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["43501", "337"], "images": [],
+      "variants": [
+        { "id": "58045", "slug": "abaya-aicha---roze", "name": "Abaya Aicha - Roze", "color": "Roze", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/abaya-aicha/58040/abaya-aicha---roze/58045/5157/43501/" }
+      ]
+    },
+    {
+      "id": "45620", "slug": "abaya-layla", "name": "Abaya Layla", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["43501", "337"], "images": [],
+      "variants": [
+        { "id": "45622", "slug": "abaya-layla---roze", "name": "Abaya Layla - Roze", "color": "Roze", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/abaya-layla/45620/abaya-layla---roze/45622/4050/" }
+      ]
+    },
+    {
+      "id": "63336", "slug": "abaya-malika", "name": "Abaya Malika", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["43501", "337"], "images": [],
+      "variants": [
+        { "id": "63337", "slug": "abaya-malika---zwart", "name": "Abaya Malika - Zwart", "color": "Zwart", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/abaya-malika/63336/abaya-malika---zwart/63337/5712/" }
+      ]
+    },
+    {
+      "id": "59922", "slug": "abaya-yasmin", "name": "Abaya Yasmin", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["43501", "337"], "images": [],
+      "variants": [
+        { "id": "59925", "slug": "abaya-yasmin---geel", "name": "Abaya Yasmin - Geel", "color": "Geel", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/abaya-yasmin/59922/abaya-yasmin---geel/59925/5401/" }
+      ]
+    },
+    {
+      "id": "58055", "slug": "abaya-moza", "name": "Abaya Moza", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["43501", "337"], "images": [],
+      "variants": [
+        { "id": "58056", "slug": "abaya-moza---oud-roze", "name": "Abaya Moza - Oud Roze", "color": "Oud Roze", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/abaya-moza/58055/abaya-moza---oud-roze/58056/5170/43501/" }
+      ]
+    },
+    {
+      "id": "48172", "slug": "abaya-moza", "name": "Abaya Moza (3-delig)", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["43501", "337"], "images": [],
+      "variants": [
+        { "id": "48372", "slug": "abaya-moza---roze", "name": "Abaya Moza - Roze", "color": "Roze", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/abaya-moza/48172/abaya-moza---roze/48372/4167/" }
+      ]
+    },
+    {
+      "id": "12189", "slug": "jacket-nikkie", "name": "Jacket Nikkie", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["379", "337"], "images": [],
+      "variants": [
+        { "id": "12190", "slug": "jacket-nikkie", "name": "Jacket Nikkie", "color": null, "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/jacket-nikkie/12189/jacket-nikkie/12190/1884/379/" }
+      ]
+    },
+    {
+      "id": "56034", "slug": "blazer-izza", "name": "Blazer Izza", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["56020", "337"], "images": [],
+      "variants": [
+        { "id": "56035", "slug": "blazer-izza---grijs", "name": "Blazer Izza - Grijs", "color": "Grijs", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/blazer-izza/56034/blazer-izza---grijs/56035/4780/56020/" }
+      ]
+    },
+    {
+      "id": "1250", "slug": "tunic-lucy", "name": "Tunic Lucy", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["370", "337"], "images": [],
+      "variants": [
+        { "id": "1251", "slug": "tunic-lucy---blue", "name": "Tunic Lucy - Blue", "color": "Blue", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/tunic-lucy/1250/tunic-lucy---blue/1251/439/370/" }
+      ]
+    },
+    {
+      "id": "41311", "slug": "boots-nela", "name": "Boots Nela", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["696"], "images": [],
+      "variants": [
+        { "id": "41312", "slug": "boots-nela---zwart", "name": "Boots Nela - Zwart", "color": "Zwart", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/boots-nela/41311/boots-nela---zwart/41312/3719/" }
+      ]
+    },
+    {
+      "id": "59860", "slug": "bag-rive-gauche", "name": "Bag Rive Gauche", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["401", "400"], "images": [],
+      "variants": [
+        { "id": "59862", "slug": "bag-rive-gauche---beige", "name": "Bag Rive Gauche - Beige", "color": "Beige", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/bag-rive-gauche/59860/bag-rive-gauche---beige/59862/5387/400/" }
+      ]
+    },
+    {
+      "id": "56853", "slug": "tas-grace", "name": "Tas Grace", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["401", "400"], "images": [],
+      "variants": [
+        { "id": "56855", "slug": "tas-grace---taupe", "name": "Tas Grace - Taupe", "color": "Taupe", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/tas-grace/56853/tas-grace---taupe/56855/4969/401/" }
+      ]
+    },
+    {
+      "id": "43815", "slug": "tas-bee", "name": "Tas Bee", "description": null,
+      "price": null, "compareAtPrice": null, "priceSource": null,
+      "categoryIds": ["401", "400"], "images": [],
+      "variants": [
+        { "id": "43824", "slug": "tas-bee---lila", "name": "Tas Bee - Lila", "color": "Lila", "sizes": null, "images": [], "available": null, "path": "/ferganza-womens-fashion/product/tas-bee/43815/tas-bee---lila/43824/3888/401/" }
+      ]
+    }
+  ]
+}
